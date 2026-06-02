@@ -1,0 +1,15 @@
+# Olist Revenue & CX Intelligence — Python dependencies
+
+# EL: land the 9 raw CSVs in BigQuery
+pandas
+google-cloud-bigquery
+pyarrow
+
+# AI: Claude review NLP (analyze_reviews.py)
+anthropic
+
+# dbt (transform layer) — run in a SEPARATE Python 3.9–3.12 venv (NOT 3.14):
+#   brew install python@3.12
+#   python3.12 -m venv .venv-dbt && source .venv-dbt/bin/activate
+#   pip install dbt-bigquery
+dbt-bigquery

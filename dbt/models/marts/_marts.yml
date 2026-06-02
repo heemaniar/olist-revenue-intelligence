@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: "Order spine — one row per order, the Data Studio grain."
+    columns:
+      - name: order_id
+        tests: [unique, not_null]
+      - name: is_valid_revenue
+        description: "Order status counts toward revenue (var: valid_order_status)."
+
+  - name: fct_order_items
+    description: "Item grain, enriched with category / seller / order context."
+    columns:
+      - name: order_id
+        tests: [not_null]
+      - name: product_id
+        tests: [not_null]
+
+  - name: dim_customers
+    description: "One row per customer_unique_id (the real person). Repeat-purchase lives here."
+    columns:
+      - name: customer_unique_id
+        tests: [unique, not_null]   # proves the identity grain is correct
+
+  - name: dim_sellers
+    columns:
+      - name: seller_id
+        tests: [unique, not_null]
+
+  - name: dim_products
+    columns:
+      - name: product_id
+        tests: [unique, not_null]
+
+  - name: revenue_monthly
+    description: "GMV / orders / AOV / review / on-time by month."
+    columns:
+      - name: purchase_month
+        tests: [unique, not_null]
+
+  - name: seller_performance
+    description: "Per seller: GMV, satisfaction, late rate, GMV share (Pareto)."
+    columns:
+      - name: seller_id
+        tests: [unique, not_null]
+
+  - name: category_performance
+    description: "Per category: GMV, satisfaction, freight burden, late rate."
+    columns:
+      - name: category
+        tests: [unique, not_null]
+
+  - name: delivery_review
+    description: "Avg review score by delivery-speed bucket — the late→satisfaction story."
+    columns:
+      - name: delivery_bucket
+        tests: [unique, not_null]
+
+  - name: state_performance
+    description: "Per customer state: revenue, delivery speed, on-time, satisfaction."
+    columns:
+      - name: state
+        tests: [unique, not_null]

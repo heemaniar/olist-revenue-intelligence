@@ -1,0 +1,65 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Cleaned orders, one row per order_id."
+    columns:
+      - name: order_id
+        tests: [unique, not_null]
+      - name: customer_id
+        tests: [not_null]
+      - name: order_status
+        tests:
+          - accepted_values:
+              arguments:
+                values: ["delivered", "shipped", "canceled", "unavailable",
+                         "invoiced", "processing", "created", "approved"]
+
+  - name: stg_order_items
+    description: "Order line items (order × item grain)."
+    columns:
+      - name: order_id
+        tests: [not_null]
+      - name: product_id
+        tests: [not_null]
+
+  - name: stg_payments
+    description: "Order payments (can be multiple rows per order)."
+    columns:
+      - name: order_id
+        tests: [not_null]
+
+  - name: stg_reviews
+    description: "Customer reviews; comment_message is Portuguese free text."
+    columns:
+      - name: review_id
+        tests: [not_null]
+      - name: review_score
+        tests:
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4, 5]
+
+  - name: stg_customers
+    description: "Order-customer rows. customer_id is per-order; customer_unique_id is the person."
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+      - name: customer_unique_id
+        tests: [not_null]
+
+  - name: stg_sellers
+    columns:
+      - name: seller_id
+        tests: [unique, not_null]
+
+  - name: stg_products
+    columns:
+      - name: product_id
+        tests: [unique, not_null]
+
+  - name: stg_geolocation
+    description: "One row per zip prefix (deduped from the raw multi-row geolocation)."
+    columns:
+      - name: zip_prefix
+        tests: [unique, not_null]

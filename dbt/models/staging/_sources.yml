@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw
+    database: "{{ env_var('BQ_PROJECT', 'mallpulse-hackathon') }}"
+    schema: "{{ env_var('BQ_DATASET', 'olist_core') }}"
+    description: "Raw Olist Brazilian e-commerce tables, landed by load_bigquery.py."
+    tables:
+      - name: orders
+      - name: order_items
+      - name: order_payments
+      - name: order_reviews
+      - name: customers
+      - name: sellers
+      - name: products
+      - name: geolocation
+      - name: category_translation

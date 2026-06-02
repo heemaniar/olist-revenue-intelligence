@@ -1,0 +1,15 @@
+.venv/
+.venv-dbt/
+__pycache__/
+*.pyc
+.env
+.DS_Store
+
+# Kaggle data — download into data/ (not committed; ~120 MB)
+data/
+
+# dbt artifacts
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+dbt/.user.yml

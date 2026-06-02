@@ -1,0 +1,23 @@
+name: 'olist_core'
+version: '1.0.0'
+config-version: 2
+profile: 'olist_core'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+
+clean-targets: ["target", "dbt_packages"]
+
+# Orders counted toward revenue (exclude unavailable/canceled/created).
+vars:
+  valid_order_status: ['delivered', 'shipped', 'invoiced', 'processing', 'approved']
+
+models:
+  olist_core:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    marts:
+      +materialized: table

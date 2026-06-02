@@ -1,0 +1,14 @@
+# BigQuery via gcloud Application Default Credentials (no key file):
+#   gcloud auth application-default login
+# Run dbt with:  dbt build --project-dir dbt --profiles-dir dbt
+olist_core:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      project: "{{ env_var('BQ_PROJECT', 'mallpulse-hackathon') }}"
+      dataset: "{{ env_var('BQ_DATASET', 'olist_core') }}"
+      location: "{{ env_var('BQ_LOCATION', 'US') }}"
+      threads: 4
+      priority: interactive
