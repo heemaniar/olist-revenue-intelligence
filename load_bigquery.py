@@ -113,7 +113,7 @@ def main():
         str_cols = {f.name: str for f in schema
                     if f.name in _STR_COLS}
         ts_cols = [f.name for f in schema if f.field_type == "TIMESTAMP"]
-        df = pd.read_csv(path, dtype=str_cols)
+        df = pd.read_csv(path, dtype=str_cols, encoding="utf-8-sig")  # strip BOM
         for col in ts_cols:
             if col in df.columns:
                 df[col] = pd.to_datetime(df[col], errors="coerce")

@@ -1,13 +1,13 @@
 kpi,definition,calculation,population,target,owner
-GMV,Item revenue (excludes freight).,SUM(price),Valid orders,grow,Revenue
-Net Revenue,Item revenue plus freight paid.,SUM(price + freight_value),Valid orders,grow,Revenue
-Orders,Distinct valid orders.,COUNT(DISTINCT order_id),Valid orders,grow,Revenue
-AOV,Average order value.,GMV / Orders,Valid orders,grow,Revenue
-On-Time Delivery %,Delivered on or before the estimated date.,AVG(IF(NOT is_late,1,0)),Delivered orders,>= 90%,Logistics
-Avg Delivery Days,Mean days from purchase to delivery.,AVG(delivery_days),Delivered orders,reduce,Logistics
-Avg Review Score,Mean 1-5 satisfaction (CSAT analog).,AVG(review_score),Reviewed orders,>= 4.2,CX
-Detractor %,Share of 1-2 star reviews.,AVG(IF(review_score<=2,1,0)),Reviewed orders,< 15%,CX
-Repeat-Purchase %,Customers with more than one order (by customer_unique_id).,AVG(IF(orders>1,1,0)),dim_customers,grow,Growth
-Freight-to-Price %,Shipping cost as a share of item revenue.,SUM(freight)/SUM(price),Valid orders,monitor,Logistics
-Seller GMV Concentration,GMV share of the top 10% of sellers.,top-decile GMV / total GMV,seller_performance,monitor,Revenue
-Cancellation %,Share of orders canceled.,AVG(IF(order_status='canceled',1,0)),All orders,< 1%,Ops
+GMV,Item revenue (excludes freight).,"SUM(price)",Valid orders,grow,Revenue
+Net Revenue,Item revenue plus freight paid.,"SUM(price + freight_value)",Valid orders,grow,Revenue
+Orders,Distinct valid orders.,"COUNT(DISTINCT order_id)",Valid orders,grow,Revenue
+AOV,Average order value.,"GMV / Orders",Valid orders,grow,Revenue
+On-Time Delivery %,Delivered on or before the estimated date.,"AVG(IF(NOT is_late,1,0))",Delivered orders,>= 90%,Logistics
+Avg Delivery Days,Mean days from purchase to delivery.,"AVG(delivery_days)",Delivered orders,reduce,Logistics
+Avg Review Score,Mean 1-5 satisfaction (CSAT analog).,"AVG(review_score)",Reviewed orders,>= 4.2,CX
+Detractor %,Share of 1-2 star reviews.,"AVG(IF(review_score<=2,1,0))",Reviewed orders,< 15%,CX
+Repeat-Purchase %,Customers with more than one order (by customer_unique_id).,"AVG(IF(orders>1,1,0))",dim_customers,grow,Growth
+Freight-to-Price %,Shipping cost as a share of item revenue.,"SUM(freight)/SUM(price)",Valid orders,monitor,Logistics
+Seller GMV Concentration,GMV share of the top 10% of sellers.,"top-decile GMV / total GMV",seller_performance,monitor,Revenue
+Cancellation %,Share of orders canceled.,"AVG(IF(order_status='canceled',1,0))",All orders,< 1%,Ops

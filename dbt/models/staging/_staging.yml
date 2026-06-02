@@ -39,6 +39,7 @@ models:
           - accepted_values:
               arguments:
                 values: [1, 2, 3, 4, 5]
+                quote: false
 
   - name: stg_customers
     description: "Order-customer rows. customer_id is per-order; customer_unique_id is the person."
