@@ -31,12 +31,16 @@ select
     d.delivery_days,
     d.promised_days,
     d.delivery_gap_days,
+    d.handling_days,
+    d.transit_days,
     d.is_late,
+    dist.distance_km,
     r.review_score,
     r.has_comment
 from o
 left join {{ ref('int_order_items') }}    i using (order_id)
 left join {{ ref('int_order_payments') }} p using (order_id)
 left join {{ ref('int_order_delivery') }} d using (order_id)
+left join {{ ref('int_order_distance') }} dist using (order_id)
 left join {{ ref('int_order_reviews') }}  r using (order_id)
 left join {{ ref('stg_customers') }}      c on c.customer_id = o.customer_id

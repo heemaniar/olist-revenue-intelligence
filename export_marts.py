@@ -33,6 +33,8 @@ MARTS = [
     "fct_order_items",       # item grain — category drill (no category on fct_orders)
     "revenue_monthly",
     "delivery_review",
+    "delivery_stages",       # seller-handling vs carrier-transit decomposition
+    "distance_delivery",     # seller↔customer distance → delivery/satisfaction
     "seller_performance",
     "category_performance",
     "state_performance",
