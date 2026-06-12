@@ -13,13 +13,16 @@ public URL. Screenshot pages 2 & 4 into `docs/screenshots/`.
 ## 0. Connect + data model + calculated fields
 
 **Connect:** Open Tableau Public → **Connect → Text File** → pick `tableau/fct_orders.csv`.
-Add the rest with **Data → New Data Source** (each CSV = one source). Keep it simple:
-**each sheet is built from the one source it needs** (named per tile below). Only `fct_orders`
-needs a relationship:
+Add the small aggregate marts with **Data → New Data Source** (each CSV = one source):
+`revenue_monthly`, `delivery_review`, `delivery_stages`, `distance_delivery`,
+`seller_performance`, `category_performance`, `state_performance`, `review_themes`,
+`metric_definitions`. **Each sheet is built from the one source it needs** (named per tile).
 
-- On the `fct_orders` source, drag **`fct_order_items.csv`** onto the canvas → relate on
-  **`order_id`** (gives you item-grain `category` for drill). Optionally relate
-  **`review_themes.csv`** on `order_id` too.
+⚠️ **Do NOT load `fct_order_items.csv` or `dim_customers.csv`.** Together with `fct_orders`
+they're ~307k of the 312k rows and blow Tableau Public's **512 MB** in-memory (Hyper) limit —
+that's the *"Cannot allocate … global memory limit … exceeded"* error, and the tiny file you
+add **last** just tips it over. You don't need them: category views come from
+`category_performance`, and **Repeat %** is computed from `fct_orders` directly (LOD, below).
 
 **Type fixes (do once):**
 - Booleans from CSV often import as **strings** (`"True"`/`"False"`). If `is_late`,
@@ -36,8 +39,11 @@ On-Time %      = SUM(IF [is_late]="False" THEN 1 ELSE 0 END)
                  / SUM(IF [is_late] IN ("True","False") THEN 1 ELSE 0 END)
 AOV            = SUM([gmv]) / COUNTD([order_id])
 Detractor %    = AVG(IF [review_score] <= 2 THEN 1.0 ELSE 0.0 END)
+Orders/customer = { FIXED [customer_unique_id] : COUNTD([order_id]) }
+Repeat %       = COUNTD(IF [Orders/customer] > 1 THEN [customer_unique_id] END)
+                 / COUNTD([customer_unique_id])
 ```
-On `dim_customers`:  `Repeat % = SUM(IF [is_repeat]="True" THEN 1 ELSE 0 END) / COUNTD([customer_unique_id])`
+(`Repeat %` is computed on **`fct_orders`** via the LOD above — so `dim_customers` isn't needed.)
 
 > Tableau has no "scorecard" object — a KPI tile is a **sheet with one measure** shown as
 > text (BAN, "big-ass-number"): drag the measure to **Text**, hide headers, big font.
@@ -56,7 +62,7 @@ On `dim_customers`:  `Repeat % = SUM(IF [is_repeat]="True" THEN 1 ELSE 0 END) / 
 | AOV | `AOV` |
 | On-Time % | `On-Time %` (format %) |
 | Avg Review | `AVG([review_score])` |
-| Repeat % | `Repeat %` (source `dim_customers`, format %) |
+| Repeat % | `Repeat %` (computed on `fct_orders` via LOD, format %) |
 
 > **Repeat % ≈ 3% is real** — low-repeat marketplace; label it as a finding.
 
