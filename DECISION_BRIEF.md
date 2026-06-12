@@ -8,10 +8,10 @@ revenue we don't yet capture — is **delivery speed**. Three moves below.
 
 ---
 
-### 1. Late delivery is the #1 satisfaction killer — fix the long tail
-**Evidence.** Review score falls monotonically with delivery time: **4.46★ at 0–3 days → 3.05★ at 22+ days**, where **40% of customers are detractors** (vs 7% for fast deliveries). The 22+-day bucket (~11k orders, ~12% of volume) is **52% late to promise**.
-**Recommendation.** Target the slowest lanes/sellers: tighten the carrier hand-off and set realistic promised dates. Even moving the 22+-day cohort to the 15–21-day band lifts those orders from ~3.0★ to ~4.1★.
-**Projected impact.** ~11k orders/period exit detractor territory → a measurable lift in average review and, given the retention finding below, the clearest path to repeat revenue.
+### 1. Late delivery is the #1 satisfaction killer — and it's a *carrier* problem, not seller dispatch
+**Evidence.** Review score falls monotonically with delivery time: **4.46★ at 0–3 days → 3.05★ at 22+ days** (40% detractors vs 7% for fast deliveries). Decomposing the order journey pinpoints the cause: when an order is late, **carrier transit balloons to 25.7 days (vs 7.8 on-time), while seller handling barely moves (5.8 vs 3.0)** — lateness is a transit problem, not a dispatch one. And it's **distance-driven**: 0–50 km orders deliver in **6.1 days at 4.28★**; 1,000+ km orders take **19.1 days at 4.02★** with ~2× the late rate.
+**Recommendation.** This is a **carrier/network fix, not seller onboarding**: hold carriers to transit SLAs, add **regional carriers or fulfillment nodes for long-distance lanes**, and set promised dates *by distance band* so expectations match reality.
+**Projected impact.** ~11k orders/period exit detractor territory → a measurable review lift and, given the retention finding below, the clearest path to repeat revenue.
 
 ### 2. Retention is the real gap — 3% repeat is the opportunity, not a footnote
 **Evidence.** Only **3.1%** of customers (of 96k) order more than once. Acquisition is strong; the marketplace simply doesn't bring customers back.
