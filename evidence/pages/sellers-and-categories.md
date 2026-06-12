@@ -1,5 +1,6 @@
 ---
 title: Sellers & Categories
+sidebar_position: 2
 ---
 
 ## Revenue is seller-concentrated

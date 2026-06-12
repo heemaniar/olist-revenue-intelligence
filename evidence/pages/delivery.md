@@ -1,5 +1,6 @@
 ---
 title: Delivery & Satisfaction
+sidebar_position: 1
 ---
 
 The headline CX story: **late delivery is the #1 satisfaction killer — and it's a

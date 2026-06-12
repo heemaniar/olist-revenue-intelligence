@@ -1,5 +1,6 @@
 ---
 title: Metric Definitions
+sidebar_position: 4
 ---
 
 The KPI **single source of truth**. Every number on this dashboard, in the dbt marts,

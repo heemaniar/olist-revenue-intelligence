@@ -1,5 +1,6 @@
 ---
 title: Voice of Customer (AI)
+sidebar_position: 3
 ---
 
 Portuguese review comments tagged by **Claude** (structured output: sentiment +
@@ -38,7 +39,7 @@ group by theme, sentiment
 order by reviews desc
 ```
 
-<BarChart data={theme_sentiment} x=theme y=reviews series=sentiment type=stacked title="Reviews by theme and sentiment" swapXY=true/>
+<BarChart data={theme_sentiment} x=theme y=reviews series=sentiment type=stacked title="Reviews by theme and sentiment" swapXY=true seriesColors={{positive: '#3a9d7e', neutral: '#eaa53e', negative: '#d35a3c'}}/>
 
 ## Sample negative comments (Claude summaries)
 
