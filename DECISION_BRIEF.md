@@ -25,10 +25,10 @@ problem). Four moves below.
 **Projected impact.** Reduces single-seller revenue risk and creates a second growth vector beyond customer acquisition.
 
 ### 4. Beyond speed, fulfillment *accuracy* is the hidden satisfaction driver (AI review tagging)
-**Evidence.** Claude tagged review comments by theme + sentiment. Delivery is the most *frequent* complaint (133 negative mentions), but the most *score-destroying* themes are **wrong/missing item (~1.6★)**, **customer service (~1.6★)**, and **not-as-described (~2.0★)** — fulfillment-accuracy and seller-responsiveness problems that hurt more per occurrence than slow delivery itself. Star ratings alone couldn't separate these; the LLM tagging did.
+**Evidence.** Claude tagged a 1,500-review sample by theme + sentiment (0 failures; 38% negative). Delivery is the most *frequent* complaint (301 negative mentions), but the most *score-destroying* themes are **wrong/missing item (1.66★)**, **customer service (2.28★)**, and **not-as-described (2.39★)** — versus delivery's **3.64★**. Fulfillment-accuracy and seller-responsiveness problems hurt more per occurrence than slow delivery itself; star ratings alone couldn't separate these — the LLM tagging did.
 **Recommendation.** A **second lever, distinct from Finding 1**: tighten listing/description fidelity and order-picking accuracy at the seller level, plus seller response SLAs. Owner is marketplace/seller ops — not the carrier.
 **Projected impact.** Targets the lowest-rated experiences directly; with Finding 1 it covers both axes of dissatisfaction — *speed* and *accuracy*.
 
 ---
 
-*All figures reconcile to the governed marts (`METRICS.md`); GMV integrity is dbt-tested. Review themes (Finding 4) are Claude-tagged on a ~630-comment sample — the ranking is stable; exact counts firm up at full coverage.*
+*All figures reconcile to the governed marts (`METRICS.md`); GMV integrity is dbt-tested. Review themes (Finding 4) are Claude-tagged on a 1,500-review sample (0 tagging failures).*
