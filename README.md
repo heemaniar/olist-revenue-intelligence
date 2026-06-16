@@ -5,18 +5,21 @@ Turning raw Brazilian-marketplace data into a **governed, decision-driving** rev
 project — KPI single-source-of-truth, dbt, decision brief, Claude — applied to a
 **different business function on real, messy data.**
 
-**Stack:** Kaggle CSVs → BigQuery (EL) → **dbt** (staging → intermediate → marts, tested) → **Data Studio**, with **Python + Claude** for Portuguese review NLP.
+**🔗 Live dashboard:** https://unrivaled-pothos-267c70.netlify.app · [Decision brief](DECISION_BRIEF.md) · [Metrics dictionary](METRICS.md)
+
+**Stack:** Kaggle CSVs → BigQuery (EL) → **dbt** (staging → intermediate → marts, tested) → **Evidence** dashboard (live, built as code), with **Python + Claude** for Portuguese review NLP.
 
 > Dataset: [Olist Brazilian E-Commerce](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) — ~100k real (anonymised) orders, 2016–2018, 9 relational CSVs. Full design in [`BUILD_GUIDE.md`](BUILD_GUIDE.md).
 
 ---
 
-## Status
-- ✅ Repo + dbt project scaffolded; **`dbt parse` clean**
-- ✅ EL loader (`load_bigquery.py`), 9 typed source tables
-- ✅ dbt: 8 staging · 4 intermediate · 10 marts + tests + GMV-integrity singular test
-- ⬜ Run against data (download Kaggle CSVs → load → `dbt build`)
-- ⬜ KPI dictionary (`METRICS.md`) · review NLP (`analyze_reviews.py`) · dashboard · decision brief
+## Status — shipped
+- ✅ EL loader → 9 typed source tables in BigQuery
+- ✅ dbt: staging → intermediate → marts, **all tests green**, GMV-integrity singular test, lineage DAG
+- ✅ KPI dictionary (`METRICS.md`) + warehouse `metric_definitions` seed — one source of truth
+- ✅ Claude review NLP (`analyze_reviews.py`) → **1,500-review** Voice-of-Customer themes
+- ✅ **Live Evidence dashboard** (5 pages) — [unrivaled-pothos-267c70.netlify.app](https://unrivaled-pothos-267c70.netlify.app)
+- ✅ Leadership [decision brief](DECISION_BRIEF.md)
 
 ## Quickstart
 ```bash
@@ -42,7 +45,8 @@ sources (9 raw)
    ▼ intermediate int_order_items · int_order_payments · int_order_delivery · int_order_reviews
    ▼ marts        fct_orders · fct_order_items · dim_customers/sellers/products
                   revenue_monthly · seller_performance · category_performance
-                  delivery_review · state_performance
+                  delivery_review · delivery_stages · distance_delivery
+                  state_performance · review_themes (AI)
 ```
 
 ## Modeling decisions (the interview talking points)
