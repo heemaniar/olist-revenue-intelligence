@@ -2,9 +2,10 @@
 
 **For:** Leadership (Revenue, Logistics, Growth) · **From:** Analytics · **Basis:** 98k valid orders, 2016–2018 (real Olist data)
 
-**Bottom line:** The marketplace is **acquisition-rich but retention-poor**, and the
-single biggest, most fixable lever on satisfaction — and therefore on the repeat
-revenue we don't yet capture — is **delivery speed**. Three moves below.
+**Bottom line:** The marketplace is **acquisition-rich but retention-poor**. The two most
+fixable levers on satisfaction — and therefore on the repeat revenue we don't yet capture —
+are **delivery speed** (the volume problem) and **fulfillment accuracy** (the severity
+problem). Four moves below.
 
 ---
 
@@ -23,6 +24,11 @@ revenue we don't yet capture — is **delivery speed**. Three moves below.
 **Recommendation.** Formalize a seller-success tier for the top decile (SLA, support, inventory), and a light onboarding/quality program for the long tail.
 **Projected impact.** Reduces single-seller revenue risk and creates a second growth vector beyond customer acquisition.
 
+### 4. Beyond speed, fulfillment *accuracy* is the hidden satisfaction driver (AI review tagging)
+**Evidence.** Claude tagged review comments by theme + sentiment. Delivery is the most *frequent* complaint (133 negative mentions), but the most *score-destroying* themes are **wrong/missing item (~1.6★)**, **customer service (~1.6★)**, and **not-as-described (~2.0★)** — fulfillment-accuracy and seller-responsiveness problems that hurt more per occurrence than slow delivery itself. Star ratings alone couldn't separate these; the LLM tagging did.
+**Recommendation.** A **second lever, distinct from Finding 1**: tighten listing/description fidelity and order-picking accuracy at the seller level, plus seller response SLAs. Owner is marketplace/seller ops — not the carrier.
+**Projected impact.** Targets the lowest-rated experiences directly; with Finding 1 it covers both axes of dissatisfaction — *speed* and *accuracy*.
+
 ---
 
-*All figures reconcile to the governed marts (`METRICS.md`); GMV integrity is dbt-tested. Next: AI review-theme analysis (Voice of Customer) to name the specific complaint drivers behind the low scores in Finding 1.*
+*All figures reconcile to the governed marts (`METRICS.md`); GMV integrity is dbt-tested. Review themes (Finding 4) are Claude-tagged on a ~630-comment sample — the ranking is stable; exact counts firm up at full coverage.*
