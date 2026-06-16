@@ -12,3 +12,4 @@ static/data
 # Source CSVs ARE committed — the connected-repo Netlify/Vercel build needs them
 # to generate the dashboard offline. (Regenerate with export_marts.py if marts change.)
 *.duckdb
+.evidence/customization/.profile.json
