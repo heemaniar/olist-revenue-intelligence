@@ -9,6 +9,6 @@ static/data
 .env
 .evidence/meta
 
-# generated extracts (regenerate: export_marts.py → copy into sources/olist/)
-sources/**/*.csv
+# Source CSVs ARE committed — the connected-repo Netlify/Vercel build needs them
+# to generate the dashboard offline. (Regenerate with export_marts.py if marts change.)
 *.duckdb

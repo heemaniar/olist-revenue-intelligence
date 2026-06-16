@@ -1,0 +1,9 @@
+# Netlify deploy for the Evidence dashboard (project lives in evidence/).
+# Connect this GitHub repo in Netlify — these settings are picked up automatically.
+[build]
+  base = "evidence"
+  command = "npm run sources && npm run build"
+  publish = "build"
+
+[build.environment]
+  NODE_VERSION = "20"

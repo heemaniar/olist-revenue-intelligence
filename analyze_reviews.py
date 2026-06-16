@@ -17,12 +17,36 @@ Run (Python 3.x venv with anthropic + google-cloud-bigquery):
 """
 
 import argparse
+import collections
 import json
 import os
+import threading
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import pandas as pd
 from google.cloud import bigquery
+
+
+class RateLimiter:
+    """Thread-safe sliding-window limiter to stay under the org's RPM cap."""
+
+    def __init__(self, rpm):
+        self.rpm = rpm
+        self.calls = collections.deque()
+        self.lock = threading.Lock()
+
+    def acquire(self):
+        with self.lock:
+            now = time.monotonic()
+            while self.calls and now - self.calls[0] > 60:
+                self.calls.popleft()
+            if len(self.calls) >= self.rpm:
+                time.sleep(max(60 - (now - self.calls[0]), 0))
+                now = time.monotonic()
+                while self.calls and now - self.calls[0] > 60:
+                    self.calls.popleft()
+            self.calls.append(time.monotonic())
 
 PROJECT = os.getenv("BQ_PROJECT") or os.getenv("GOOGLE_CLOUD_PROJECT")
 DATASET = os.getenv("BQ_DATASET", "olist_core")
@@ -89,7 +113,8 @@ def fetch_reviews(bq, n):
     return df.sample(min(n, len(df)), random_state=7).reset_index(drop=True)
 
 
-def classify(client, text):
+def classify(client, limiter, text):
+    limiter.acquire()
     resp = client.messages.create(
         model=MODEL, max_tokens=200,
         system=[{"type": "text", "text": SYSTEM, "cache_control": {"type": "ephemeral"}}],
@@ -104,19 +129,21 @@ def classify(client, text):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--sample", type=int, default=2000)
-    ap.add_argument("--workers", type=int, default=8)
+    ap.add_argument("--workers", type=int, default=4)
+    ap.add_argument("--rpm", type=int, default=45)
     args = ap.parse_args()
     if not PROJECT:
         raise SystemExit("Set BQ_PROJECT or GOOGLE_CLOUD_PROJECT.")
     import anthropic
-    client = anthropic.Anthropic()
+    client = anthropic.Anthropic(max_retries=8)
+    limiter = RateLimiter(args.rpm)
     bq = bigquery.Client(project=PROJECT)
 
     df = fetch_reviews(bq, args.sample)
 
     rows, done, fails = [], 0, 0
     def work(rec):
-        return rec, classify(client, str(rec["comment_message"]))
+        return rec, classify(client, limiter, str(rec["comment_message"]))
 
     with ThreadPoolExecutor(max_workers=args.workers) as ex:
         futures = [ex.submit(work, r) for _, r in df.iterrows()]
