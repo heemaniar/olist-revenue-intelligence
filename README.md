@@ -5,7 +5,7 @@ Turning raw Brazilian-marketplace data into a **governed, decision-driving** rev
 project — KPI single-source-of-truth, dbt, decision brief, Claude — applied to a
 **different business function on real, messy data.**
 
-**🔗 Live dashboard:** https://unrivaled-pothos-267c70.netlify.app · [Decision brief](DECISION_BRIEF.md) · [Metrics dictionary](METRICS.md)
+**🔗 Live dashboard:** https://olist-revenue-intelligence.netlify.app · [Decision brief](DECISION_BRIEF.md) · [Metrics dictionary](METRICS.md)
 
 **Stack:** Kaggle CSVs → BigQuery (EL) → **dbt** (staging → intermediate → marts, tested) → **Evidence** dashboard (live, built as code), with **Python + Claude** for Portuguese review NLP.
 
@@ -13,12 +13,22 @@ project — KPI single-source-of-truth, dbt, decision brief, Claude — applied 
 
 ---
 
+## Dashboard
+
+[**▶ Live on Netlify**](https://olist-revenue-intelligence.netlify.app/) — built as code with Evidence on the dbt marts (warm theme, 5 pages).
+
+**Executive overview**
+![Executive overview — GMV, KPIs, monthly revenue with the Nov-2017 Black Friday spike](docs/screenshots/executive-overview.png)
+
+**Voice of Customer (AI)** — Claude-tagged review themes
+![Voice of Customer — avg review by theme and theme volume by sentiment, from 1,500 AI-tagged reviews](docs/screenshots/voice-of-customer.png)
+
 ## Status — shipped
 - ✅ EL loader → 9 typed source tables in BigQuery
 - ✅ dbt: staging → intermediate → marts, **all tests green**, GMV-integrity singular test, lineage DAG
 - ✅ KPI dictionary (`METRICS.md`) + warehouse `metric_definitions` seed — one source of truth
 - ✅ Claude review NLP (`analyze_reviews.py`) → **1,500-review** Voice-of-Customer themes
-- ✅ **Live Evidence dashboard** (5 pages) — [unrivaled-pothos-267c70.netlify.app](https://unrivaled-pothos-267c70.netlify.app)
+- ✅ **Live Evidence dashboard** (5 pages) — [olist-revenue-intelligence.netlify.app](https://olist-revenue-intelligence.netlify.app)
 - ✅ Leadership [decision brief](DECISION_BRIEF.md)
 
 ## Quickstart
