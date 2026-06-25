@@ -1,3 +1,4 @@
+-- Payment grain (an order can have several rows); collapsed in int_order_payments.
 select
     order_id,
     payment_sequential,
