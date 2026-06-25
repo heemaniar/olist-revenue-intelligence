@@ -1,3 +1,4 @@
+-- Product dimension: id + English category and a few physical attributes.
 select
     product_id,
     category,

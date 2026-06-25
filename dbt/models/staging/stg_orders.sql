@@ -1,3 +1,4 @@
+-- One row per order: status + the four lifecycle timestamps, renamed to *_at.
 select
     order_id,
     customer_id,

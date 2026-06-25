@@ -1,3 +1,4 @@
+-- Item grain (one row per line item): price + freight, keyed to product & seller.
 select
     order_id,
     order_item_id,

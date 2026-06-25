@@ -5,7 +5,7 @@ Turning raw Brazilian-marketplace data into a **governed, decision-driving** rev
 project — KPI single-source-of-truth, dbt, decision brief, Claude — applied to a
 **different business function on real, messy data.**
 
-**🔗 Live dashboard:** https://olist-revenue-intelligence.netlify.app · [Decision brief](DECISION_BRIEF.md) · [Metrics dictionary](METRICS.md)
+**🔗 Live dashboard:** https://olist-revenue-intelligence.netlify.app · [Decision brief](DECISION_BRIEF.md) · [Metrics dictionary](METRICS.md) · [Code map](CODE_MAP.md)
 
 **Stack:** Kaggle CSVs → BigQuery (EL) → **dbt** (staging → intermediate → marts, tested) → **Evidence** dashboard (live, built as code), with **Python + Claude** for Portuguese review NLP.
 
